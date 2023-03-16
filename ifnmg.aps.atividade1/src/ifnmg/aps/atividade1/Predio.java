@@ -28,7 +28,7 @@ public class Predio {
 		this.salas = salas;
 	}
 	
-	public ArrayList<SalaReuniao> obterSalasLivres(Intervalo intervalo) {
+	public ArrayList<SalaReuniao> obterSalasLivres(Intervalo intervalo) throws Exception {
 		ArrayList<SalaReuniao> salasLivres = new ArrayList<SalaReuniao>();
 		
 		for (SalaReuniao sala : this.salas) {
