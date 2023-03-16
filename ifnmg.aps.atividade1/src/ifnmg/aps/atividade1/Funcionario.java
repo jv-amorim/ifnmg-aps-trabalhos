@@ -10,15 +10,13 @@ public class Funcionario {
 	public int getId() {
 		return id;
 	}
-
 	public void setId(int id) {
 		this.id = id;
 	}
-
+	
 	public String getNome() {
 		return nome;
 	}
-
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
@@ -26,7 +24,6 @@ public class Funcionario {
 	public String getRamal() {
 		return ramal;
 	}
-
 	public void setRamal(String ramal) {
 		this.ramal = ramal;
 	}
@@ -34,7 +31,6 @@ public class Funcionario {
 	public CargoEnum getCargo() {
 		return cargo;
 	}
-
 	public void setCargo(CargoEnum cargo) {
 		this.cargo = cargo;
 	}
