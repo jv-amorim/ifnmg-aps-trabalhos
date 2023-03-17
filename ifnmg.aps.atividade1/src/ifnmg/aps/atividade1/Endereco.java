@@ -1,6 +1,6 @@
 package ifnmg.aps.atividade1;
 
-public class Edereco {
+public class Endereco {
     private int id;
     private String cep;
     private String endereco;
