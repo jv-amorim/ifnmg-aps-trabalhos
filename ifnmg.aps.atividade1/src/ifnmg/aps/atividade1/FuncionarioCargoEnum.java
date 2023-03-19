@@ -1,5 +1,5 @@
 package ifnmg.aps.atividade1;
 
-public enum CargoEnum {
+public enum FuncionarioCargoEnum {
 	Professor
 }

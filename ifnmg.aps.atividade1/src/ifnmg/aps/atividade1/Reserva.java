@@ -4,17 +4,20 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class Reserva {
-	private int id;
+	
+	private SalaReuniao salaReuniao;
 	private LocalDate dataLocacao;
 	private LocalTime horaInicio;
 	private LocalTime horaFim;
 	private String assunto;
-	
-	public int getId() {
-		return id;
+	private boolean ativa;
+	private Equipamento[] equipamentos;
+
+	public SalaReuniao getSalaReuniao() {
+		return salaReuniao;
 	}
-	public void setId(int id) {
-		this.id = id;
+	public void setSalaReuniao(SalaReuniao salaReuniao) {
+		this.salaReuniao = salaReuniao;
 	}
 	
 	public LocalDate getDataLocacao() {
@@ -44,4 +47,19 @@ public class Reserva {
 	public void setAssunto(String assunto) {
 		this.assunto = assunto;
 	}
+	
+	public Equipamento[] getEquipamentos() {
+		return equipamentos;
+	}
+	public void setEquipamentos(Equipamento[] equipamentos) {
+		this.equipamentos = equipamentos;
+	}
+	
+	public boolean getAtiva() {
+		return ativa;
+	}
+	public void setAtiva(boolean ativa) {
+		this.ativa = ativa;
+	}
+	
 }

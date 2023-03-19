@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class Intervalo {
+	
 	private LocalDate data;
 	private LocalTime horaInicio;
 	private LocalTime horaFim;
@@ -25,4 +26,5 @@ public class Intervalo {
 		this.horaInicio = horaInicio;
 		this.horaFim = horaFim;
 	}
+	
 }

@@ -3,20 +3,13 @@ package ifnmg.aps.atividade1;
 import java.util.ArrayList;
 
 public class Campus {
-
-    private int id;
+	
     private String nome;
     private Endereco endereco;
     private ArrayList<Predio> predios;
     private ArrayList<Equipamento> equipamentos;
     private ArrayList<Funcionario> funcionarios;
     
-    public int getId() {
-        return id;
-    }
-    public void setId(int id) {
-        this.id = id;
-    }
     public String getNome() {
         return nome;
     }
@@ -47,7 +40,5 @@ public class Campus {
     public void setFuncionarios(ArrayList<Funcionario> funcionarios) {
         this.funcionarios = funcionarios;
     }
-
     
-
 }

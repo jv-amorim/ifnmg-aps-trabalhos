@@ -1,18 +1,10 @@
 package ifnmg.aps.atividade1;
 
 public class Funcionario {
-
-	private int id;
+	
 	private String nome;
 	private String ramal;
-	private CargoEnum cargo;
-
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
+	private FuncionarioCargoEnum cargo;
 	
 	public String getNome() {
 		return nome;
@@ -28,11 +20,11 @@ public class Funcionario {
 		this.ramal = ramal;
 	}
 
-	public CargoEnum getCargo() {
+	public FuncionarioCargoEnum getCargo() {
 		return cargo;
 	}
-	public void setCargo(CargoEnum cargo) {
+	public void setCargo(FuncionarioCargoEnum cargo) {
 		this.cargo = cargo;
 	}
-
+	
 }

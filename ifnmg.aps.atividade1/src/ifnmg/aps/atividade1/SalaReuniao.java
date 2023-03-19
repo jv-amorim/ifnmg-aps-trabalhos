@@ -4,17 +4,10 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 
 public class SalaReuniao {
-	private int id;
+	
 	private int numero;
 	private int qtdLugares;
 	private ArrayList<Reserva> reservas;
-	
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
 	
 	public int getNumero() {
 		return numero;
@@ -64,4 +57,5 @@ public class SalaReuniao {
 		
 		return true;
 	}
+	
 }

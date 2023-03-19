@@ -1,21 +1,22 @@
 package ifnmg.aps.atividade1;
 
 public class Equipamento {
-    private int id;
+	
     private String nome;
-
-    public int getId() {
-        return id;
-    }
+    private double patrimonio;
+    
     public String getNome() {
         return nome;
-    }
-    public void setId(int id) {
-        this.id = id;
     }
     public void setNome(String nome) {
         this.nome = nome;
     }
-
+    
+    public double getPatrimonio() {
+        return patrimonio;
+    }
+    public void setPatrimonio(double id) {
+        this.patrimonio = id;
+    }
     
 }

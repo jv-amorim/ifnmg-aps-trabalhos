@@ -3,16 +3,9 @@ package ifnmg.aps.atividade1;
 import java.util.ArrayList;
 
 public class Predio {
-	private int id;
+	
 	private String nome;
 	private ArrayList<SalaReuniao> salas;
-	
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
 	
 	public String getNome() {
 		return nome;
@@ -39,4 +32,5 @@ public class Predio {
 		
 		return salasLivres;
 	}
+	
 }
