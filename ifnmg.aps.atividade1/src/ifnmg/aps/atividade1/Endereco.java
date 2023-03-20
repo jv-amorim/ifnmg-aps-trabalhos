@@ -3,7 +3,6 @@ package ifnmg.aps.atividade1;
 public class Endereco {
 	
     private String cep;
-    private String endereco;
     private String logradouro;
     private String numero;
     private String complemento;
@@ -16,13 +15,6 @@ public class Endereco {
     }
     public void setCep(String cep) {
         this.cep = cep;
-    }
-    
-    public String getEndereco() {
-        return endereco;
-    }
-    public void setEndereco(String endereco) {
-        this.endereco = endereco;
     }
     
     public String getLogradouro() {

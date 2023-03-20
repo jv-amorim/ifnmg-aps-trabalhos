@@ -16,24 +16,28 @@ public class Campus {
     public void setNome(String nome) {
         this.nome = nome;
     }
+    
     public Endereco getEndereco() {
         return endereco;
     }
     public void setEndereco(Endereco endereco) {
         this.endereco = endereco;
     }
+    
     public ArrayList<Predio> getPredios() {
         return predios;
     }
     public void setPredios(ArrayList<Predio> predios) {
         this.predios = predios;
     }
+    
     public ArrayList<Equipamento> getEquipamentos() {
         return equipamentos;
     }
     public void setEquipamentos(ArrayList<Equipamento> equipamentos) {
         this.equipamentos = equipamentos;
     }
+    
     public ArrayList<Funcionario> getFuncionarios() {
         return funcionarios;
     }
