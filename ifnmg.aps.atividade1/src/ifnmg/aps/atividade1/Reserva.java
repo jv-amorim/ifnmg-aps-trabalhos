@@ -2,6 +2,7 @@ package ifnmg.aps.atividade1;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 
 public class Reserva {
 	
@@ -11,7 +12,7 @@ public class Reserva {
 	private LocalTime horaFim;
 	private String assunto;
 	private boolean ativa;
-	private Equipamento[] equipamentos;
+	private ArrayList<Equipamento> equipamentos;
 
 	public SalaReuniao getSalaReuniao() {
 		return salaReuniao;
@@ -48,10 +49,10 @@ public class Reserva {
 		this.assunto = assunto;
 	}
 	
-	public Equipamento[] getEquipamentos() {
+	public ArrayList<Equipamento> getEquipamentos() {
 		return equipamentos;
 	}
-	public void setEquipamentos(Equipamento[] equipamentos) {
+	public void setEquipamentos(ArrayList<Equipamento> equipamentos) {
 		this.equipamentos = equipamentos;
 	}
 	
