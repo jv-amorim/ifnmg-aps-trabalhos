@@ -40,9 +40,9 @@ class UseCase1 {
 		
 		try {
 			ArrayList<SalaReuniao> salasLivres = campusControlador.consultarSalasLivres(intervalo);
-			if (salasLivres.isEmpty()) {
-				fail("Deveria haver ao menos uma sala livre para esta consulta.");
-			}
+			
+			assertNotNull(salasLivres, "Deveria haver ao menos uma sala livre para esta consulta.");
+			assertFalse(salasLivres.isEmpty(), "Deveria haver ao menos uma sala livre para esta consulta.");
 			
 			SalaReuniao salaSelecionada = salasLivres.get(0);
 			

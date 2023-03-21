@@ -228,6 +228,15 @@ public class MockData {
 		reserva7.setAssunto("C");
 		reserva7.setAtiva(true);
 		reserva7.setEquipamentos(new ArrayList<Equipamento>());
+		
+		Reserva reserva8 = new Reserva();
+		reserva8.setSalaReuniao(sala01);
+		reserva8.setDataLocacao(LocalDate.of(2023, Month.FEBRUARY, 5));
+		reserva8.setHoraInicio(LocalTime.of(14, 0));
+		reserva8.setHoraFim(LocalTime.of(16, 0));
+		reserva8.setAssunto("D");
+		reserva8.setAtiva(true);
+		reserva8.setEquipamentos(new ArrayList<Equipamento>());
 				
 		ArrayList<Reserva> reservas = new ArrayList<Reserva>();
 		reservas.add(reserva1);
@@ -237,6 +246,7 @@ public class MockData {
 		reservas.add(reserva5);
 		reservas.add(reserva6);
 		reservas.add(reserva7);
+		reservas.add(reserva8);
 		
 		MockData.reservas = reservas;
 	}

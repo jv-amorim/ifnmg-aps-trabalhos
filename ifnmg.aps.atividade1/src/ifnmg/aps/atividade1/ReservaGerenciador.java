@@ -1,6 +1,11 @@
 package ifnmg.aps.atividade1;
 
+import java.time.LocalDate;
+import java.time.Month;
+import java.time.temporal.WeekFields;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class ReservaGerenciador {
 
@@ -13,37 +18,116 @@ public class ReservaGerenciador {
 		return instance;
 	}
 	
-	private ArrayList<Reserva> reservas;
+	private ArrayList<Reserva> reservas = new ArrayList<Reserva>();
 
 	public void initData(ArrayList<Reserva> reservas) {
 		this.reservas = reservas;
 	}
 
 	public ArrayList<Reserva> listarPorSala(SalaReuniao salaReuniao) {
-		ArrayList<Reserva> reservasEncontradas = new ArrayList<Reserva>();		
-		
-		for (Reserva reserva : reservas) {
-			if (reserva.getSalaReuniao() == salaReuniao) {				
-				reservasEncontradas.add(reserva);
-			}
+		if (reservas.isEmpty()) {
+			return new ArrayList<Reserva>();
 		}
 		
-		return reservasEncontradas;
+		List<Reserva> reservasEncontradas = reservas
+			.stream()
+			.filter(r -> r.getSalaReuniao() == salaReuniao)
+			.collect(Collectors.toList());
+		
+		return new ArrayList<Reserva>(reservasEncontradas);
 	}
 
 	public ArrayList<ReservaAgrupamento> listarPorDia() {
-		// TODO Auto-generated method stub
-		return null;
+		if (reservas.isEmpty()) {
+			return null;
+		}
+		
+		List<LocalDate> diasDistintos = reservas
+			.stream()
+			.map(r -> r.getDataLocacao())
+			.distinct()
+			.sorted()
+			.collect(Collectors.toList());
+		
+		ArrayList<ReservaAgrupamento> agrupamentos = new ArrayList<ReservaAgrupamento>();
+		
+		for (LocalDate dia : diasDistintos) {
+			List<Reserva> reservasDoDia = reservas
+				.stream()
+				.filter(r -> r.getDataLocacao() == dia)
+				.collect(Collectors.toList());
+			
+			ReservaAgrupamento agrupamento = new ReservaAgrupamento();
+			agrupamento.setPeriodoTipo(PeriodoTipoEnum.Dia);
+			agrupamento.setData(dia);
+			agrupamento.setReservas(new ArrayList<Reserva>(reservasDoDia));
+			
+			agrupamentos.add(agrupamento);
+		}
+		
+		return agrupamentos;
 	}
 
 	public ArrayList<ReservaAgrupamento> listarPorSemana() {
-		// TODO Auto-generated method stub
-		return null;
+		if (reservas.isEmpty()) {
+			return null;
+		}
+		
+		List<Integer> semanasDistintas = reservas
+			.stream()
+			.map(r -> r.getDataLocacao().get(WeekFields.SUNDAY_START.weekOfWeekBasedYear()))
+			.distinct()
+			.sorted()
+			.collect(Collectors.toList());
+		
+		ArrayList<ReservaAgrupamento> agrupamentos = new ArrayList<ReservaAgrupamento>();
+		
+		for (Integer semana : semanasDistintas) {
+			List<Reserva> reservasDaSemana = reservas
+				.stream()
+				.filter(r -> r.getDataLocacao().get(WeekFields.SUNDAY_START.weekOfWeekBasedYear()) == semana)
+				.collect(Collectors.toList());
+			
+			ReservaAgrupamento agrupamento = new ReservaAgrupamento();
+			agrupamento.setPeriodoTipo(PeriodoTipoEnum.Semana);
+			agrupamento.setSemana(semana);
+			agrupamento.setReservas(new ArrayList<Reserva>(reservasDaSemana));
+			
+			agrupamentos.add(agrupamento);
+		}
+		
+		return agrupamentos;
 	}
 
 	public ArrayList<ReservaAgrupamento> listarPorMes() {
-		// TODO Auto-generated method stub
-		return null;
+		if (reservas.isEmpty()) {
+			return null;
+		}
+		
+		List<Month> mesesDistintos = reservas
+			.stream()
+			.map(r -> r.getDataLocacao().getMonth())
+			.distinct()
+			.sorted()
+			.collect(Collectors.toList());
+		
+		ArrayList<ReservaAgrupamento> agrupamentos = new ArrayList<ReservaAgrupamento>();
+		
+		for (Month mes : mesesDistintos) {
+			List<Reserva> reservasDoMes = reservas
+				.stream()
+				.filter(r -> r.getDataLocacao().getMonth() == mes)
+				.collect(Collectors.toList());
+			
+			ReservaAgrupamento agrupamento = new ReservaAgrupamento();
+			agrupamento.setPeriodoTipo(PeriodoTipoEnum.Mes);
+			agrupamento.setMes(mes);
+			agrupamento.setReservas(new ArrayList<Reserva>(reservasDoMes));
+			
+			agrupamentos.add(agrupamento);
+		}
+		
+		return agrupamentos;
 	}
 	
 }

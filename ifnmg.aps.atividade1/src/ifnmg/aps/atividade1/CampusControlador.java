@@ -35,16 +35,31 @@ public class CampusControlador {
 	}
 	
 	public ArrayList<ReservaAgrupamento> obterListaOcupacao(PeriodoTipoEnum periodoTipo) throws Exception {
+		if (periodoTipo == null) {
+			throw new Exception(Exceptions.PERIODO_INVALIDO.getMessage());
+		}
+		
+		ArrayList<ReservaAgrupamento> resultado;
+		
 		switch (periodoTipo) {
 			case Dia:
-				return reservaGerenciador.listarPorDia();
+				resultado = reservaGerenciador.listarPorDia();
+				break;
 			case Semana:
-				return reservaGerenciador.listarPorSemana();
+				resultado = reservaGerenciador.listarPorSemana();
+				break;
 			case Mes:
-				return reservaGerenciador.listarPorMes();
+				resultado = reservaGerenciador.listarPorMes();
+				break;
 			default:
 				throw new Exception(Exceptions.PERIODO_INVALIDO.getMessage());
 		}
+		
+		if (resultado == null) {
+			throw new Exception(Exceptions.NENHUMA_RESERVA.getMessage());
+		}
+		
+		return resultado;
 	}
 	
 }
