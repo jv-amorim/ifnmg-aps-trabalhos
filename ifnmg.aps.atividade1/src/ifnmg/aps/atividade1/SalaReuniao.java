@@ -7,7 +7,7 @@ public class SalaReuniao {
 	
 	private int numero;
 	private int qtdLugares;
-	private ArrayList<Reserva> reservas;
+	private ReservaGerenciador reservaGerenciador;
 	
 	public int getNumero() {
 		return numero;
@@ -23,22 +23,17 @@ public class SalaReuniao {
 		this.qtdLugares = qtdLugares;
 	}
 	
-	public ArrayList<Reserva> getReservas() {
-		return reservas;
-	}
-	public void setReservas(ArrayList<Reserva> reservas) {
-		this.reservas = reservas;
+	public SalaReuniao() {
+		this.reservaGerenciador = ReservaGerenciador.getInstance();
 	}
 	
-	public boolean verificarDisponibilidade(Intervalo intervalo) throws Exception {
+	public boolean verificarDisponibilidade(Intervalo intervalo) {
+		ArrayList<Reserva> reservas = reservaGerenciador.listarPorSala(this);
+		
 		LocalTime intervaloInicio = intervalo.getHoraInicio();
 		LocalTime intervaloFim = intervalo.getHoraFim();
 		
-		if (intervaloInicio.isAfter(intervaloFim)) {
-			throw new Exception("A hora de inicio nao pode ser maior que a hora de termino da reserva.");
-		}
-		
-		for (Reserva reserva : this.reservas) {
+		for (Reserva reserva : reservas) {
 			if (reserva.getDataLocacao().compareTo(intervalo.getData()) != 0) {
 				continue;
 			}

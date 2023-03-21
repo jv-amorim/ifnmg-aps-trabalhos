@@ -17,4 +17,21 @@ public class CampusControlador {
 		this.campusAtual = campi.get(0);
 	}
 	
+	public ArrayList<SalaReuniao> consultarSalasLivres(Intervalo intervalo) throws Exception {
+		if (!intervalo.isValid()) {
+			throw new Exception(Exceptions.INTERVALO_INVALIDO.getMessage());
+		}
+		
+		ArrayList<SalaReuniao> salasLivres = new ArrayList<SalaReuniao>();
+		for (Predio predio : campusAtual.getPredios()) {
+			salasLivres.addAll(predio.obterSalasLivres(intervalo));
+		}
+		
+		if (salasLivres.isEmpty()) {
+			throw new Exception(Exceptions.NENHUMA_SALA.getMessage());
+		}
+		
+		return salasLivres;
+	}
+	
 }

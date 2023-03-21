@@ -27,4 +27,8 @@ public class Intervalo {
 		this.horaFim = horaFim;
 	}
 	
+	public boolean isValid() {
+		return horaInicio.isBefore(horaFim);
+	}
+	
 }
