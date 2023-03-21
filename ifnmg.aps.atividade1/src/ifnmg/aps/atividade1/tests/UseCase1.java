@@ -32,7 +32,7 @@ class UseCase1 {
 	}
 
 	@Test
-	void cenarioPrincipal() throws Exception {
+	void cenarioPrincipal() {
 		LocalDate data = LocalDate.of(2023, Month.JANUARY, 1);
 		LocalTime horaInicio = LocalTime.of(10, 0);
 		LocalTime horaFim = LocalTime.of(11, 0);

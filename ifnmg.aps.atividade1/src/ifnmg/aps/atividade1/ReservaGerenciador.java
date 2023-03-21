@@ -30,5 +30,20 @@ public class ReservaGerenciador {
 		
 		return reservasEncontradas;
 	}
+
+	public ArrayList<ReservaAgrupamento> listarPorDia() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ArrayList<ReservaAgrupamento> listarPorSemana() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ArrayList<ReservaAgrupamento> listarPorMes() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }
