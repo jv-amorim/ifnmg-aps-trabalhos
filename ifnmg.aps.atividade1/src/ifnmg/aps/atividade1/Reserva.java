@@ -63,4 +63,10 @@ public class Reserva {
 		this.ativa = ativa;
 	}
 	
+	public void adicionarEquipamento(Equipamento equipamento) {
+		if (equipamentos == null) {
+			equipamentos = new ArrayList<Equipamento>();
+		}
+		equipamentos.add(equipamento);
+	}
 }

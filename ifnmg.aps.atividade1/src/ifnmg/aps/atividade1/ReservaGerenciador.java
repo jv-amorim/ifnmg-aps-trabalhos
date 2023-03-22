@@ -143,10 +143,25 @@ public class ReservaGerenciador {
 		reserva.setAssunto(assunto);
 		reserva.setAtiva(true);
 		reserva.setEquipamentos(new ArrayList<Equipamento>());
-		
+
+		if (reservas == null) {
+			reservas = new ArrayList<Reserva>();
+		}
 		reservas.add(reserva);
 		
 		return reserva;
+	}
+	
+	public boolean verificarUsoEquipamento(Equipamento equipamento) {
+		List<Equipamento> equipamentosSendoUtilizados = reservas
+			.stream()
+			.map(r -> r.getEquipamentos())
+			.flatMap(ArrayList::stream)
+			.collect(Collectors.toList());
+		
+		return equipamentosSendoUtilizados
+			.stream()
+			.anyMatch(e -> e.equals(equipamento));
 	}
 	
 }

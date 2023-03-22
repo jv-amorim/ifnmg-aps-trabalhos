@@ -73,4 +73,27 @@ public class CampusControlador {
 		return reservaGerenciador.criarReserva(sala, intervalo, assunto);
 	}
 	
+	public ArrayList<Equipamento> obterEquipamentos() throws Exception {
+		ArrayList<Equipamento> equipamentos = campusAtual.getEquipamentos();
+		
+		if (equipamentos == null || equipamentos.isEmpty()) {
+			throw new Exception(Exceptions.NENHUM_EQUIPAMENTO.getMessage());
+		}
+		
+		return equipamentos;
+	}
+	
+	public boolean adicionarEquipamento(Reserva reserva, Equipamento equipamento) throws Exception {
+		if (equipamento == null) {
+			throw new Exception(Exceptions.EQUIPAMENTO_INVALIDO.getMessage());
+		}
+		if (reservaGerenciador.verificarUsoEquipamento(equipamento)) {
+			throw new Exception(Exceptions.EQUIPAMENTO_INDISPONIVEL.getMessage());
+		}
+		
+		reserva.adicionarEquipamento(equipamento);
+		
+		return true;
+	}
+	
 }

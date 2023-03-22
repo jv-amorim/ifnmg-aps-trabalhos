@@ -6,14 +6,18 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.Month;
 import java.util.ArrayList;
+import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import ifnmg.aps.atividade1.Campus;
 import ifnmg.aps.atividade1.CampusControlador;
+import ifnmg.aps.atividade1.Equipamento;
 import ifnmg.aps.atividade1.Exceptions;
 import ifnmg.aps.atividade1.Intervalo;
 import ifnmg.aps.atividade1.MockData;
+import ifnmg.aps.atividade1.PeriodoTipoEnum;
 import ifnmg.aps.atividade1.Reserva;
 import ifnmg.aps.atividade1.ReservaGerenciador;
 import ifnmg.aps.atividade1.SalaReuniao;
@@ -110,15 +114,105 @@ class UseCase3 {
 		}
 	}
 	
-	private Intervalo obterIntervalo() {
-		LocalDate data = LocalDate.of(2023, Month.JANUARY, 1);
-		LocalTime horaInicio = LocalTime.of(10, 0);
-		LocalTime horaFim = LocalTime.of(11, 0);
+	// Teste de adição de equipamento.
+	@Test
+	void cenario6A() throws Exception {
+		SalaReuniao salaSelecionada = obterSalaSelecionada();
+		Intervalo intervalo = obterIntervalo();
+		String assuntoReserva = "Sacro Império Romano-Germânico";
+		Reserva reserva = campusControlador.reservarSala(salaSelecionada, intervalo, assuntoReserva);
 		
-		Intervalo intervalo = new Intervalo(data, horaInicio, horaFim);
-		
-		return intervalo;
+		try {
+			ArrayList<Equipamento> equipamentos = campusControlador.obterEquipamentos();
+			Equipamento equipamentoSelecionado = equipamentos
+				.stream()
+				.filter(e -> e.getNome()
+				.equals("Portal interdimensional"))
+				.findFirst()
+				.orElse(null);
+			
+			boolean result = campusControlador.adicionarEquipamento(reserva, equipamentoSelecionado);
+			
+			assertTrue(
+				result,
+				"O resultado da operação indica uma falha na adição do equipamento."
+			);
+			assertTrue(
+				reserva.getEquipamentos().stream().anyMatch(e -> e.equals(equipamentoSelecionado)),
+				"O equipamento não está presente na reserva, o que indica uma falha na adição do equipamento."
+			);
+		}
+		catch (Exception ex) {
+			fail("Não deveria ter ocorrido uma exceção para esta operação.");
+		}
 	}
+	
+	@Test
+	void cenario6A2A() throws Exception {
+		ArrayList<Campus> campi = MockData.getCampi();
+		for (Campus campus : campi) {
+			campus.setEquipamentos(new ArrayList<Equipamento>());
+		}
+		campusControlador.initData(campi);
+		
+		try {
+			campusControlador.obterEquipamentos();
+			fail("Deveria ter ocorrido uma exceção para esta consulta.");
+		}
+		catch (Exception ex) {
+			assertEquals(ex.getMessage(), Exceptions.NENHUM_EQUIPAMENTO.getMessage(), "Deveria ter ocorrido uma exceção de outro tipo.");
+		}
+	}
+	
+	@Test
+	void cenario6A3A() throws Exception {
+		SalaReuniao salaSelecionada = obterSalaSelecionada();
+		Intervalo intervalo = obterIntervalo();
+		String assuntoReserva = "Sacro Império Romano-Germânico";
+		Reserva reserva = campusControlador.reservarSala(salaSelecionada, intervalo, assuntoReserva);
+		
+		try {
+			campusControlador.adicionarEquipamento(reserva, null);
+			fail("Deveria ter ocorrido uma exceção para esta operação.");
+		}
+		catch (Exception ex) {
+			assertEquals(ex.getMessage(), Exceptions.EQUIPAMENTO_INVALIDO.getMessage(), "Deveria ter ocorrido uma exceção de outro tipo.");
+		}
+	}
+	
+	@Test
+	void cenario6A4A() throws Exception {
+		SalaReuniao salaSelecionada = obterSalaSelecionada();
+		Intervalo intervalo = obterIntervalo();
+		String assuntoReserva = "Sacro Império Romano-Germânico";
+		Reserva reserva = campusControlador.reservarSala(salaSelecionada, intervalo, assuntoReserva);
+		
+		try {
+			ArrayList<Equipamento> equipamentos = campusControlador.obterEquipamentos();
+			Equipamento equipamentoSelecionado = equipamentos
+				.stream()
+				.filter(e -> e.getNome()
+				.equals("Portal interdimensional"))
+				.findFirst()
+				.orElse(null);
+			
+			campusControlador.adicionarEquipamento(reserva, equipamentoSelecionado);
+			
+			// Tentativa de adição do mesmo equipamento novamente.
+			campusControlador.adicionarEquipamento(reserva, equipamentoSelecionado);
+			
+			fail("Deveria ter ocorrido uma exceção para esta operação.");
+		}
+		catch (Exception ex) {
+			assertEquals(ex.getMessage(), Exceptions.EQUIPAMENTO_INDISPONIVEL.getMessage(), "Deveria ter ocorrido uma exceção de outro tipo.");
+		}
+	}
+	
+	// Nota: os casos alternativos 6.B e 6.A.3.B não possuem testes, pois referem-se a alguma interface de interação com o usuário.
+	
+	// -------------------
+	// Métodos Auxiliares:
+	// -------------------
 	
 	// O caso de teste presume que o usuário já selecionou com sucesso uma sala livre com base no intervalo.
 	private SalaReuniao obterSalaSelecionada() throws Exception {
@@ -128,5 +222,15 @@ class UseCase3 {
 		SalaReuniao salaSelecionada = salasLivres.get(0);
 		
 		return salaSelecionada;
+	}
+	
+	private Intervalo obterIntervalo() {
+		LocalDate data = LocalDate.of(2023, Month.JANUARY, 1);
+		LocalTime horaInicio = LocalTime.of(10, 0);
+		LocalTime horaFim = LocalTime.of(11, 0);
+		
+		Intervalo intervalo = new Intervalo(data, horaInicio, horaFim);
+		
+		return intervalo;
 	}
 }
