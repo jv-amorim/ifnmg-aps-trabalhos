@@ -40,7 +40,6 @@ class UseCase3 {
 		String assuntoReserva = "Sacro Império Romano-Germânico";
 		
 		try {
-			
 			Reserva reserva = campusControlador.reservarSala(salaSelecionada, intervalo, assuntoReserva);
 			
 			assertNotNull(reserva, "A reserva criada não deveria ser nula.");
@@ -50,6 +49,11 @@ class UseCase3 {
 			assertEquals(reserva.getHoraFim(), intervalo.getHoraFim(), "A hora de fim da reserva é diferente da informada.");
 			assertEquals(reserva.getAssunto(), assuntoReserva, "O assunto da reserva é diferente do informado.");
 			assertNotNull(reserva.getEquipamentos(), "A lista de equipamentos da reserva não deveria ser um objeto nulo.");
+			
+			assertFalse(
+				salaSelecionada.verificarDisponibilidade(intervalo),
+				"A sala não deveria mais estar disponível, ou seja, a reserva não foi salva com sucesso."
+			);
 		}
 		catch (Exception ex) {
 			fail("Não deveria ter ocorrido uma exceção para esta operação.");
@@ -86,6 +90,26 @@ class UseCase3 {
 		}
 	}
 
+	@Test
+	void cenario4A() throws Exception {
+		SalaReuniao salaSelecionada = obterSalaSelecionada();
+		
+		LocalDate data = LocalDate.of(2023, Month.JANUARY, 5);
+		LocalTime horaInicio = LocalTime.of(15, 0);
+		LocalTime horaFim = LocalTime.of(16, 0);
+		Intervalo intervalo = new Intervalo(data, horaInicio, horaFim);
+		
+		String assuntoReserva = "Sacro Império Romano-Germânico";
+		
+		try {
+			campusControlador.reservarSala(salaSelecionada, intervalo, assuntoReserva);
+			fail("Deveria ter ocorrido uma exceção para esta consulta.");
+		}
+		catch (Exception ex) {
+			assertEquals(ex.getMessage(), Exceptions.SALA_INDISPONIVEL.getMessage(), "Deveria ter ocorrido uma exceção de outro tipo.");
+		}
+	}
+	
 	private Intervalo obterIntervalo() {
 		LocalDate data = LocalDate.of(2023, Month.JANUARY, 1);
 		LocalTime horaInicio = LocalTime.of(10, 0);

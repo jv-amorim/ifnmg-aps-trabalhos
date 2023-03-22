@@ -41,11 +41,19 @@ public class SalaReuniao {
 			LocalTime reservaInicio = reserva.getHoraInicio();
 			LocalTime reservaFim = reserva.getHoraFim();
 			
-			if (reservaInicio.isBefore(intervaloInicio) && reservaFim.isAfter(intervaloInicio)) {
+			boolean result =
+				(reservaInicio.isBefore(intervaloInicio) || reservaInicio.equals(intervaloInicio))
+				&& (reservaFim.isAfter(intervaloInicio) || reservaFim.equals(intervaloInicio));
+			
+			if (result) {
 				return false;
 			}
 			
-			if (reservaInicio.isAfter(intervaloInicio) && reservaInicio.isBefore(intervaloFim)) {
+			result =
+				(reservaInicio.isAfter(intervaloInicio) || reservaInicio.equals(intervaloInicio))
+				&& (reservaInicio.isBefore(intervaloFim) || reservaInicio.equals(intervaloFim));
+			
+			if (result) {
 				return false;
 			}
 		}
