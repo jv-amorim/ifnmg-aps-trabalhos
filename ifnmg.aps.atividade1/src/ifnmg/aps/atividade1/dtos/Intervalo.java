@@ -1,4 +1,4 @@
-package ifnmg.aps.atividade1;
+package ifnmg.aps.atividade1.dtos;
 
 import java.time.LocalDate;
 import java.time.LocalTime;

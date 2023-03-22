@@ -10,12 +10,12 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import ifnmg.aps.atividade1.CampusControlador;
-import ifnmg.aps.atividade1.Exceptions;
-import ifnmg.aps.atividade1.Intervalo;
-import ifnmg.aps.atividade1.MockData;
-import ifnmg.aps.atividade1.ReservaGerenciador;
-import ifnmg.aps.atividade1.SalaReuniao;
+import ifnmg.aps.atividade1.controllers.CampusControlador;
+import ifnmg.aps.atividade1.data.MockData;
+import ifnmg.aps.atividade1.dtos.Intervalo;
+import ifnmg.aps.atividade1.entities.SalaReuniao;
+import ifnmg.aps.atividade1.enums.Exceptions;
+import ifnmg.aps.atividade1.services.ReservaGerenciador;
 
 class UseCase1 {
 	

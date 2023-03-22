@@ -1,6 +1,8 @@
-package ifnmg.aps.atividade1;
+package ifnmg.aps.atividade1.entities;
 
 import java.util.ArrayList;
+
+import ifnmg.aps.atividade1.dtos.Intervalo;
 
 public class Predio {
 	

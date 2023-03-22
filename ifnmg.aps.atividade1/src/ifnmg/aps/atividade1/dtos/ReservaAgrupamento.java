@@ -1,8 +1,11 @@
-package ifnmg.aps.atividade1;
+package ifnmg.aps.atividade1.dtos;
 
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.ArrayList;
+
+import ifnmg.aps.atividade1.entities.Reserva;
+import ifnmg.aps.atividade1.enums.PeriodoTipoEnum;
 
 public class ReservaAgrupamento {
 	

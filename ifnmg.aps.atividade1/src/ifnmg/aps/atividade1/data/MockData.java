@@ -1,9 +1,18 @@
-package ifnmg.aps.atividade1;
+package ifnmg.aps.atividade1.data;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.Month;
 import java.util.ArrayList;
+
+import ifnmg.aps.atividade1.entities.Campus;
+import ifnmg.aps.atividade1.entities.Endereco;
+import ifnmg.aps.atividade1.entities.Equipamento;
+import ifnmg.aps.atividade1.entities.Funcionario;
+import ifnmg.aps.atividade1.entities.Predio;
+import ifnmg.aps.atividade1.entities.Reserva;
+import ifnmg.aps.atividade1.entities.SalaReuniao;
+import ifnmg.aps.atividade1.enums.FuncionarioCargoEnum;
 
 public class MockData {
 

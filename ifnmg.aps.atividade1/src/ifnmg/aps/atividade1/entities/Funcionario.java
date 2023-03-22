@@ -1,4 +1,6 @@
-package ifnmg.aps.atividade1;
+package ifnmg.aps.atividade1.entities;
+
+import ifnmg.aps.atividade1.enums.FuncionarioCargoEnum;
 
 public class Funcionario {
 	

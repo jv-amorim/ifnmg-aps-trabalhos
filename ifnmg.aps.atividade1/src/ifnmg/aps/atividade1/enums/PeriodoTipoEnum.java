@@ -1,4 +1,4 @@
-package ifnmg.aps.atividade1;
+package ifnmg.aps.atividade1.enums;
 
 public enum PeriodoTipoEnum {
 	Dia,

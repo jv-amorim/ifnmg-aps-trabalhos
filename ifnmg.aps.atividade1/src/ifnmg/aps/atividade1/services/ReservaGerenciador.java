@@ -1,4 +1,4 @@
-package ifnmg.aps.atividade1;
+package ifnmg.aps.atividade1.services;
 
 import java.time.LocalDate;
 import java.time.Month;
@@ -6,6 +6,14 @@ import java.time.temporal.WeekFields;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import ifnmg.aps.atividade1.dtos.Intervalo;
+import ifnmg.aps.atividade1.dtos.ReservaAgrupamento;
+import ifnmg.aps.atividade1.entities.Equipamento;
+import ifnmg.aps.atividade1.entities.Reserva;
+import ifnmg.aps.atividade1.entities.SalaReuniao;
+import ifnmg.aps.atividade1.enums.Exceptions;
+import ifnmg.aps.atividade1.enums.PeriodoTipoEnum;
 
 public class ReservaGerenciador {
 

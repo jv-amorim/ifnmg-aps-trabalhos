@@ -1,7 +1,10 @@
-package ifnmg.aps.atividade1;
+package ifnmg.aps.atividade1.entities;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
+
+import ifnmg.aps.atividade1.dtos.Intervalo;
+import ifnmg.aps.atividade1.services.ReservaGerenciador;
 
 public class SalaReuniao {
 	

@@ -1,4 +1,4 @@
-package ifnmg.aps.atividade1;
+package ifnmg.aps.atividade1.entities;
 
 public class Equipamento {
 	
