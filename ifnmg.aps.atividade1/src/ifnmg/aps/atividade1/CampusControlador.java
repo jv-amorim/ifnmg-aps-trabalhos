@@ -18,7 +18,7 @@ public class CampusControlador {
 	}
 	
 	public ArrayList<SalaReuniao> consultarSalasLivres(Intervalo intervalo) throws Exception {
-		if (!intervalo.isValid()) {
+		if (intervalo == null || !intervalo.isValid()) {
 			throw new Exception(Exceptions.INTERVALO_INVALIDO.getMessage());
 		}
 		
@@ -60,6 +60,17 @@ public class CampusControlador {
 		}
 		
 		return resultado;
+	}
+	
+	public Reserva reservarSala(SalaReuniao sala, Intervalo intervalo, String assunto) throws Exception {
+		if (intervalo == null || !intervalo.isValid()) {
+			throw new Exception(Exceptions.INTERVALO_INVALIDO.getMessage());
+		}
+		if (assunto == null || assunto.isBlank()) {
+			throw new Exception(Exceptions.ASSUNTO_INVALIDO.getMessage());
+		}
+		
+		return reservaGerenciador.criarReserva(sala, intervalo, assunto);
 	}
 	
 }

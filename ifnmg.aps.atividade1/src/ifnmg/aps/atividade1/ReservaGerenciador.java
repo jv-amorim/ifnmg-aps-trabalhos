@@ -130,4 +130,23 @@ public class ReservaGerenciador {
 		return agrupamentos;
 	}
 	
+	public Reserva criarReserva(SalaReuniao sala, Intervalo intervalo, String assunto) throws Exception {
+		if (!sala.verificarDisponibilidade(intervalo)) {
+			throw new Exception(Exceptions.SALA_INDISPONIVEL.getMessage());
+		}
+		
+		Reserva reserva = new Reserva();
+		reserva.setSalaReuniao(sala);
+		reserva.setDataLocacao(intervalo.getData());
+		reserva.setHoraInicio(intervalo.getHoraInicio());
+		reserva.setHoraFim(intervalo.getHoraFim());
+		reserva.setAssunto(assunto);
+		reserva.setAtiva(true);
+		reserva.setEquipamentos(new ArrayList<Equipamento>());
+		
+		reservas.add(reserva);
+		
+		return reserva;
+	}
+	
 }

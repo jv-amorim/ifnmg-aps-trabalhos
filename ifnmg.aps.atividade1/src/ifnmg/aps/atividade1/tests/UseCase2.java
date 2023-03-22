@@ -118,7 +118,7 @@ class UseCase2 {
 	}
 
 	@Test
-	void cenario3A() {
+	void cenario4A() {
 		try {
 			ReservaGerenciador.getInstance().initData(new ArrayList<Reserva>());
 			
