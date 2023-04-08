@@ -15,8 +15,8 @@ public class Equipamento {
     public double getPatrimonio() {
         return patrimonio;
     }
-    public void setPatrimonio(double id) {
-        this.patrimonio = id;
+    public void setPatrimonio(double equipamento) {
+        this.patrimonio = equipamento;
     }
     
 }
