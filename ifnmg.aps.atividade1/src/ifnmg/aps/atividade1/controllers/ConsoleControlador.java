@@ -9,24 +9,21 @@ import java.util.Optional;
 import java.util.Scanner;
 
 import ifnmg.aps.atividade1.dtos.Intervalo;
+import ifnmg.aps.atividade1.dtos.ReservaAgrupamento;
 import ifnmg.aps.atividade1.entities.Equipamento;
 import ifnmg.aps.atividade1.entities.Reserva;
 import ifnmg.aps.atividade1.entities.SalaReuniao;
 import ifnmg.aps.atividade1.enums.Exceptions;
+import ifnmg.aps.atividade1.enums.PeriodoTipoEnum;
+import ifnmg.aps.atividade1.utils.DateTimeUtils;
 
 public class ConsoleControlador {
 
 	private Scanner inputScanner;
-	private DateTimeFormatter localDateFormatter;
-	private DateTimeFormatter localTimeFormatter;
-	
 	private CampusControlador campusControlador;
 	
 	public ConsoleControlador(CampusControlador campusControlador) {
 		this.inputScanner = new Scanner(System.in);
-		this.localDateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-		this.localTimeFormatter = DateTimeFormatter.ofPattern("HH:mm");
-		
 		this.campusControlador = campusControlador;
 	}
 	
@@ -126,7 +123,7 @@ public class ConsoleControlador {
 			System.out.print("\nDigite a data da reserva (dd/MM/yyyy): ");
 			String dataString = inputScanner.nextLine();
 			try {
-				data = LocalDate.parse(dataString, localDateFormatter);
+				data = DateTimeUtils.dateFromString(dataString);
 			}
 			catch (DateTimeParseException ex) {
 				System.out.println("\nA data informada é inválida. Utilize o formato informado dd/MM/yyyy.");
@@ -137,7 +134,7 @@ public class ConsoleControlador {
 			System.out.print("\nDigite a hora de início da reserva (HH:mm): ");
 			String horaInicioString = inputScanner.nextLine();
 			try {
-				horaInicio = LocalTime.parse(horaInicioString, localTimeFormatter);
+				horaInicio = DateTimeUtils.timeFromString(horaInicioString);
 			}
 			catch (DateTimeParseException ex) {
 				System.out.println("\nA hora informada é inválida. Utilize o formato informado HH/mm.");
@@ -148,7 +145,7 @@ public class ConsoleControlador {
 			System.out.print("\nDigite a hora de término da reserva (HH:mm): ");
 			String horaFimString = inputScanner.nextLine();
 			try {
-				horaFim = LocalTime.parse(horaFimString, localTimeFormatter);
+				horaFim = DateTimeUtils.timeFromString(horaFimString);
 			}
 			catch (DateTimeParseException ex) {
 				System.out.println("\nA hora informada é inválida. Utilize o formato informado HH/mm.");
@@ -299,7 +296,60 @@ public class ConsoleControlador {
 	}
 	
 	private void executarConsultaDeOcupacao() {
+		escreverSeparador();
+		System.out.print("Consulta de Ocupação");
+		escreverSeparador();
 		
+		PeriodoTipoEnum periodoTipoSelecionado = solicitarPeriodoTipo();
+		ArrayList<ReservaAgrupamento> listaDeOcupacao;
+		
+		try {
+			listaDeOcupacao = campusControlador.obterListaOcupacao(periodoTipoSelecionado);
+		}
+		catch (Exception ex) {
+			System.out.println("\n" + ex.getMessage());
+			return;
+		}
+		
+		System.out.println();
+		
+		for (ReservaAgrupamento agrupamento : listaDeOcupacao) {
+			escreverSeparador();
+			System.out.print(agrupamento.toString());
+		}
 	}
 	
+	private PeriodoTipoEnum solicitarPeriodoTipo() {
+		System.out.println("\nSelecione o tipo de período para a consulta:");
+		
+		PeriodoTipoEnum[] periodoTipoValues = PeriodoTipoEnum.values();
+		
+		for (int i = 0; i < periodoTipoValues.length; i++) {
+			PeriodoTipoEnum periodoTipo = periodoTipoValues[i];
+			System.out.println(String.format("[%s] %s;", i + 1, periodoTipo.toString()));
+		}
+		
+		PeriodoTipoEnum tipoSelecionado = null;
+		
+		while (tipoSelecionado == null) {
+			System.out.print("\nDigite a opção selecionada: ");
+			String opcaoSelecionada = inputScanner.nextLine();		
+			
+			try {
+				Integer opcaoSelecionadaInteger = Integer.parseInt(opcaoSelecionada);
+				
+				if (opcaoSelecionadaInteger < 1 || opcaoSelecionadaInteger > periodoTipoValues.length) {
+					System.out.println("\nA opção selecionada é inválida. Tente novamente.");
+					continue;
+				}
+				
+				tipoSelecionado = periodoTipoValues[--opcaoSelecionadaInteger];
+			}
+			catch (NumberFormatException ex) {
+				System.out.println("\nA opção selecionada é inválida. Tente novamente.");
+			}
+		}
+		
+		return tipoSelecionado;
+	}
 }
